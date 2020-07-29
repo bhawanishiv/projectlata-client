@@ -1,27 +1,23 @@
-# ProjectLataWebApp
+# Project LATA Web-Client
+A remote devices / process management system also with energy measurement module.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
+Web application can be seen here: https://project-lata.firebaseapp.com/
 
-## Development server
+This is web cleint application, built in Angular framework. 
+Energy measurement or control module is another moudle already has been added to this project.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
+1. Create your own account for all operaions.
+2. Create multiple instances for your own IoT projects.
+3. Select out of various devices for IoT project (like Arduino etc.)
+4. Select various communication devices.
+5. Dynamic pin definition system.
+6. Define pin configurarion by this application.
+7. See readings of end devices from this web application.
+8. Send commands to end device (instance) for operation.
+9. News for ongoing work.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Ongoing work
+1. Role based user management module.
+2. Automatic embedded code generation according to definition provided.
+3. Mobile application development.
