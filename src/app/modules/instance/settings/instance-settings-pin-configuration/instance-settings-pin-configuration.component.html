@@ -1,0 +1,15 @@
+<div class="container">
+    <ng-template #addPinConfigTempl>
+        <h1>Add Pin Configurations</h1>
+        <instance-settings-add-pin-configuration [instance]="instance">
+        </instance-settings-add-pin-configuration>
+    </ng-template>
+    <ng-template #pinConfigurationTempl>
+        <instance-pin-configurations [configurations]="configs" [instance]="instance"></instance-pin-configurations>
+    </ng-template>
+    <ng-template #noPinDefinition>
+        <p>No configuration found</p>
+        <button ngpButton (click)="showAddPinConfigTempl()">Add Configurartion</button>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="currentTempl"></ng-container>
+</div>

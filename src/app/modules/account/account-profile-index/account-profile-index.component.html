@@ -1,0 +1,6 @@
+<h2>{{user?.displayName}}</h2>
+<div class="account__badges">
+    <button *ngFor="let badge of badges" class="account__badge">{{badge}}</button>
+</div>
+<p>{{user?.email}}</p>
+<button (click)="logout()" ngpButton>Logout</button>

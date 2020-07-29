@@ -1,0 +1,62 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar>
+            <a routerLink="/" class="project__lata">
+                <img src="../../../../assets/images/project-lata.png" alt="Project LATA" class="project__lata_logo--sm">
+            </a>
+        </mat-toolbar>
+        <div class="instance__overview">
+            <a class="instance__overview--icon" routerLink="overview">
+                <svg class="icon">
+                      <use xlink:href="assets/icons/light.svg#home"/>
+              </svg>
+                <div>Overview</div>
+            </a>
+            <a routerLink="settings" class="instance__overview--icon right">
+                <svg class="icon">
+                  <use xlink:href="assets/icons/light.svg#cog"/>
+              </svg>
+            </a>
+        </div>
+        <!-- <mat-accordion>
+            <mat-expansion-panel class="expansion">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>General Info</mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="status" class="sidenav__link">
+                        <svg class="icon">
+                            <use xlink:href="assets/icons/light.svg#gamepad"/>
+                        </svg>
+                        <span>Live Status</span>
+                    </a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+        </mat-accordion> -->
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <div class="header">
+                <div class="header__title">
+                    <button class="header__title--select" [matMenuTriggerFor]="menu">{{currentInstance?.instanceName}}</button>
+                    <mat-menu #menu="matMenu">
+                        <ng-container *ngIf="availableInstances$| async as instances">
+                            <button *ngFor="let instance of instances" (click)="routeToSelectedInstance(instance?.instanceId)" mat-menu-item>{{instance?.instanceName}}</button>
+                        </ng-container>
+                    </mat-menu>
+                </div>
+                <div class="header__links">
+                    <ng-container *ngIf="appUser">
+                        <a class="user" [routerLink]="'/account/'+appUser?.uid">
+                            <ngp-user-avatar [user]="appUser"></ngp-user-avatar>
+                        </a>
+                    </ng-container>
+                </div>
+            </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

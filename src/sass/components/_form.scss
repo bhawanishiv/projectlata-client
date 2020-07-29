@@ -1,0 +1,58 @@
+.form {
+    &__group {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        &--primary {
+            margin: 1.2rem 0rem;
+            padding: .5rem 3rem;
+            background-color: $color-grey;
+            &:first-of-type {
+                border-radius: 3.5rem 0rem 3.5rem 0rem;
+            }
+            &:not(:first-of-type):not(:last-of-type) {
+                border-radius: 0rem 3.5rem 3.5rem 0rem;
+            }
+            &:last-of-type {
+                border-radius: 0rem 3.5rem 0rem 3.5rem;
+            }
+            .form__label {
+                color: $color-grey-dark-1;
+            }
+        }
+    }
+    &__input {
+        line-height: 1.5;
+        font-weight: 600;
+        border: none;
+        max-width: auto;
+        background-color: transparent;
+        color: $color-black;
+        &:focus {
+            border: none;
+            outline: none;
+            background-color: transparent;
+        }
+    }
+    &__btn {
+        &.right {
+            color: $color-black;
+            padding: 1rem 2rem;
+            background-color: $color-primary;
+            border-radius: 0rem 4rem 4rem 4rem;
+        }
+        &--apend {
+            position: absolute;
+            top: .4rem;
+            right: 3rem;
+        }
+    }
+    &__footer {
+        margin: 1.5rem 0rem;
+        display: flex;
+        align-items: center;
+        [type="submit"] {
+            margin-right: 2.5rem;
+        }
+    }
+}

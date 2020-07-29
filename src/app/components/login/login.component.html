@@ -1,0 +1,57 @@
+<div class="container">
+    <header class="head">
+        <a routerLink="/" class="head__brand">
+            <img class="head__brand--logo" src="assets/images/project-lata.png" alt="">
+        </a>
+    </header>
+    <nav role="navigation" class="nav">
+        <!-- <a routerLinkActive="active" class="nav__link" [routerLink]="'/login'">Login</a> -->
+    </nav>
+    <section role="main" class="main">
+        <div class="login">
+            <form class="form" [formGroup]="loginForm" (ngSubmit)="doLogin(loginForm.value)" #login="ngForm">
+                <div class="form__container">
+                    <div class="form__group form__group--primary">
+                        <label ngpLabel for="">Username</label>
+                        <input ngpInput type="text" formControlName="identifier" placeholder="Username">
+                        <div class="form__response" *ngIf="login.submitted && loginForm.get('identifier').errors">
+                            <span>{{getError('identifier')}}</span>
+                            <span *ngIf="loginForm.get('identifier').hasError('required')">Please enter your username</span>
+                        </div>
+                    </div>
+                    <div class="form__group form__group--primary">
+                        <label ngpLabel for="">Password</label>
+                        <button class="btn form__btn--apend" type="button" (click)="hidePassword=!hidePassword">
+                                        <svg class="icon" *ngIf="hidePassword; else showIcon">
+                                            <use xlink:href="assets/icons/light.svg#eye" ></use>                  
+                                        </svg>
+                                        <ng-template #showIcon>
+                                            <svg class="icon">
+                                                <use xlink:href="assets/icons/light.svg#eye-slash" ></use>                    
+                                            </svg>
+                                        </ng-template>
+                                    </button>
+                        <input ngpInput [type]="hidePassword?'password':'text'" formControlName="password" placeholder="Password">
+                        <div class="form__response" *ngIf="loginForm.get('password').errors">
+                            <span *ngIf="loginForm.get('password').hasError('required')">Please enter your password</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form__footer">
+                    <button ngpButton class="form__btn right" type="submit">Login</button>
+                    <div class="form__footer--links">
+                        <a (click)="navToSignUp()">Sign up</a>
+                    </div>
+                </div>
+                <div class="form__footer">
+                    <div class="form__footer--links">
+                        <a (click)="navToForgotPassword()">Forgot password</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- <footer class="footer">
+            <p class="footer__copyright">{{footerText}}</p>
+        </footer> -->
+    </section>
+</div>

@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Create instance</h1>
+<div mat-dialog-content>
+    <form [formGroup]="instance" (ngSubmit)="crateInstance(instance.value)" #instanceForm="ngForm" novalidate>
+        <div class="form__container">
+            <div class="form__group">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Instance Name</mat-label>
+                    <input matInput type="text" formControlName="instanceName">
+                    <mat-error *ngIf="instanceForm.submitted && instance.get('instanceName').errors">
+                        <span *ngIf="instance.get('instanceName').hasError('required')">Please enter the Instance name</span>
+                        <span *ngIf="instance.get('instanceName').hasError('pattern')">Please enter a valid Instance name</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form__group">
+                <mat-form-field>
+                    <mat-label>Activity</mat-label>
+                    <mat-select formControlName="activityId">
+                        <ng-container *ngIf="activieis$ | async as activities">
+                            <mat-option *ngFor="let activity of activities" [value]="activity?.activityId">{{activity?.activityName}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="instanceForm.submitted && instance.get('activityId').errors">
+                        <span *ngIf="instance.get('activityId').hasError('required')">Please select any activity</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form__group">
+                <mat-form-field>
+                    <mat-label>CPU</mat-label>
+                    <mat-select formControlName="cpuId">
+                        <ng-container *ngIf="cpus$ | async as cpus">
+                            <mat-option *ngFor="let cpu of cpus" [value]="cpu?._id">{{cpu?.cpuName}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="instanceForm.submitted && instance.get('activityId').errors">
+                        <span *ngIf="instance.get('activityId').hasError('required')">Please select any CPU</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form__group">
+                <mat-form-field>
+                    <mat-label>Communication Device</mat-label>
+                    <mat-select formControlName="comnDeviceId">
+                        <ng-container *ngIf="comnDevices$ | async as comnDevices">
+                            <mat-option *ngFor="let comnDevice of comnDevices" [value]="comnDevice?._id">{{comnDevice?.cpuName}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="instanceForm.submitted && instance.get('comnDeviceId').errors">
+                        <span *ngIf="instance.get('comnDeviceId').hasError('required')">Please select any Comnunication device</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div mat-dialog-actions>
+            <div class="form__footer">
+                <button ngpButton class="form__btn right" type="submit">Create</button>
+            </div>
+        </div>
+    </form>
+</div>

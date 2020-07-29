@@ -1,0 +1,51 @@
+<ng-template #noPinConfigFound>
+    <p>No Pin configuration found in meta data of the selected CPU.</p>
+</ng-template>
+<ng-template #nav>
+    <div class="pin__nav">
+        <p>{{statusText}}&nbsp;</p>
+        <p>{{getPinSelectionText()}}</p>
+        <div class="pin__nav--action">
+            <button ngpButton class="btn__rounded" [disabled]="this.disabled" (click)="savePinDefinition()">Save</button>
+        </div>
+    </div>
+</ng-template>
+<div class="pin__main" [class.disabled]="this.disabled" *ngIf="availablePinConfigurations.length>0 else noPinConfigFound">
+    <ng-container *ngTemplateOutlet="nav"></ng-container>
+    <div class="pin__define">
+        <div class="pin__container">
+            <h2>Available pins&nbsp;<span>({{getRemainingNoOfPinsText()}})</span></h2>
+            <div class="pin-available__list" cdkDropList #availablePinsList="cdkDropList" [cdkDropListData]="availablePinConfigurations" [cdkDropListConnectedTo]="[inputPinsList,outputPinsList]" (cdkDropListDropped)="drop($event)">
+                <div class="badge" *ngFor="let pin of availablePinConfigurations" [cdkDragDisabled]="checkIfNotAllowed(pin?.pinTypes) ||this.disabled" cdkDrag>
+                    <div class="badge__main">{{pin?.pinNo}}&nbsp;({{pin?.pinPort}})</div>
+                    <div class="badge__msc"><span *ngFor="let type of pin?.pinTypes">{{type}}&nbsp;</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="pin__container">
+            <h2>Output pins&nbsp;<span>({{getNoOfPinsSelectedText(outputPins)}})</span></h2>
+            <div class="input__list" cdkDropList #outputPinsList="cdkDropList" [cdkDropListData]="outputPins" [cdkDropListConnectedTo]="[availablePinsList,inputPinsList]" (cdkDropListDropped)="drop($event)">
+                <div class="pin__box" *ngFor="let pin of outputPins" cdkDrag [cdkDragDisabled]="this.disabled" (click)="openDialogForPinName(pin?.pinNo)">
+                    <div class="badge">
+                        <div class="badge__main">{{pin?.pinNo}}&nbsp;({{pin?.pinPort}})</div>
+                        <div class="badge__msc"><span *ngFor="let type of pin?.pinTypes">{{type}}&nbsp;</span></div>
+                    </div>
+                    <a class="pin__box--pin-name" [class.added]="pin?.pinName">{{pin?.pinName?pin?.pinName:'Add a pin name'}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="pin__container">
+            <h2>Input pins&nbsp;<span>({{getNoOfPinsSelectedText(inputPins)}})</span></h2>
+            <div class="output__list" cdkDropList #inputPinsList="cdkDropList" [cdkDropListData]="inputPins" [cdkDropListConnectedTo]="[availablePinsList,outputPinsList]" (cdkDropListDropped)="drop($event)">
+                <div class="pin__box" *ngFor="let pin of inputPins" cdkDrag [cdkDragDisabled]="this.disabled" (click)="openDialogForPinName(pin?.pinNo,'input')">
+                    <a class="pin__box--pin-name" [class.added]="pin?.pinName">{{pin?.pinName?pin?.pinName:'Add a pin name'}}</a>
+                    <div class="badge">
+                        <div class="badge__main">{{pin?.pinNo}}&nbsp;({{pin?.pinPort}})</div>
+                        <div class="badge__msc"><span *ngFor="let type of pin?.pinTypes">{{type}}&nbsp;</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngTemplateOutlet="nav"></ng-container>
+</div>

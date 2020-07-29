@@ -1,0 +1,48 @@
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>
+
+<ng-template #noPinDefinition>
+    <p>No pin definition found. <a (click)="navToAddPinDefinition()">Add pin Definition</a></p>
+</ng-template>
+<div class="container" *ngIf="instance">
+    <ng-container *ngIf="activity$ | async as activity; else spinner">
+        <div>
+            <h1>Live status of your instance</h1>
+        </div>
+        <div class="status__container">
+            <mat-card>
+                <mat-card-content>
+                    <!-- Live Status Info Componennt by Activity -->
+
+                    <ng-container [ngSwitch]="activity?.activityId">
+                        <div *ngSwitchCase="'-MAGywiVl0g7bfwScc-V'">
+                            <!-- Live Status for Energy Control Activity -->
+                            <app-energy-control-status [instanceId]="instance?.instanceId">
+                            </app-energy-control-status>
+                        </div>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="status__container">
+            <mat-card>
+                <mat-card-content>
+                    <ng-container *ngIf="filteredPinConfigurations.length>0 else noPinDefinition">
+                        <ng-container *ngFor="let pin of filteredPinConfigurations; let i=index;">
+                            <instance-pin-cmd [pin]="pin" [instanceId]="instance?.instanceId">
+                                <ng-container [ngSwitch]="activity?.activityId">
+                                    <div *ngSwitchCase="'-MAGywiVl0g7bfwScc-V'">
+                                        <!-- Live Status for Energy Control Activity -->
+                                        <app-energy-control-pin-status [pinNo]="pin?.pinNo" [instanceId]="instance?.instanceId"></app-energy-control-pin-status>
+                                    </div>
+                                </ng-container>
+                            </instance-pin-cmd>
+                            <mat-divider *ngIf="i!==filteredPinConfigurations.length-1"></mat-divider>
+                        </ng-container>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </ng-container>
+</div>

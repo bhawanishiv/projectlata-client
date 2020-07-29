@@ -1,0 +1,21 @@
+<div class="root">
+    <header class="head">
+        <a routerLink="/" class="head__brand">
+            <img class="head__brand--logo" src="assets/images/project-lata.png" alt="Project LATA">
+        </a>
+        <ng-container *ngIf="user$ | async as user">
+            <a class="user" [routerLink]="'/account/'+user?.uid">
+                <ngp-user-avatar [user]="user"></ngp-user-avatar>
+            </a>
+        </ng-container>
+    </header>
+    <nav role="navigation" class="nav">
+        <a *ngFor="let link of links" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav__link" [routerLink]="link.path">{{link?.name}}</a>
+    </nav>
+    <section role="main" class="main">
+        <router-outlet></router-outlet>
+        <footer class="footer">
+            <p class="footer__copyright">{{footerText}}</p>
+        </footer>
+    </section>
+</div>

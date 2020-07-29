@@ -1,0 +1,24 @@
+<div class="status">
+    <div class="status__text"><a (click)="routeToPinStatus(pin?.pinNo)">{{pin?.pinName}}&nbsp;({{pin?.pinNo}})</a></div>
+    <div class="status__status">
+        <div class="badge">
+            <div class="badge__main" [class.success]="statusText==__statusString?.running">
+                {{statusText}}
+            </div>
+            <!-- <div class="badge__msc" [class.success]="getPinValue(pin.pinNo)===1" [class.warning]="getPinValue(pin.pinNo)===0" [class.failure]="getPinValue(pin.pinNo)!==0 && getPinValue(pin.pinNo)!==1">{{getStatusText(pin.pinNo)}}</div> -->
+        </div>
+    </div>
+    <div class="status__value">
+        <ng-content></ng-content>
+    </div>
+    <button class="status__action" (click)="toggleSwitch()">
+        <svg class="icon" *ngIf="getNextState() else pause">
+            <use  xlink:href="assets/icons/light.svg#play"/>
+        </svg>
+        <ng-template #pause>
+            <svg class="icon" >
+                <use  xlink:href="assets/icons/light.svg#pause"/>
+             </svg>
+        </ng-template>
+    </button>
+</div>

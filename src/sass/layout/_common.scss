@@ -1,0 +1,86 @@
+$container-padding:0 1.5rem;
+$container-margin:0 1.33rem 0rem 2rem;
+$container-margin-lg:0 1.33rem;
+.root {
+    display: grid;
+    grid-template-columns: minmax(min-content, 1fr);
+    grid-column-gap: 4rem;
+    @include respond(tab-port) {
+        padding: 0 8rem;
+        grid-template-columns: minmax(min-content, max-content) minmax(min-content, 1fr);
+    }
+}
+
+.head {
+    margin-top: 1rem;
+    padding: $container-padding;
+    display: flex;
+    align-items: center;
+    @include respond(tab-port) {
+        margin-top: 2rem;
+        padding: 0rem;
+        grid-column: 2/3;
+    }
+    &__brand {
+        &--logo {
+            width: auto;
+            height: 7rem;
+            @include respond(tab-port) {
+                padding-left: unset;
+            }
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    // justify-content: center;
+    @include respond(tab-port) {
+        align-items: unset;
+        flex-direction: column;
+    }
+    &__link {
+        padding: 0rem 1.5rem 1rem;
+        &:not(:first-child) {
+            padding: 1rem 1.5rem;
+        }
+        &.active {
+            font-size: 2.5rem;
+            // padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+.main {
+    padding: $container-padding;
+    @include respond(tab-port) {
+        padding: 0rem;
+    }
+}
+
+.footer {
+    bottom: 0;
+    &__copyright {
+        font-weight: 500;
+    }
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.project__lata_logo {
+    &--sm {
+        height: 3rem;
+    }
+}
+
+.container {
+    margin: $container-margin;
+    @include respond(tab-port) {
+        margin: $container-margin-lg;
+    }
+}

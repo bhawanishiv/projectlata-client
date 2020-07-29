@@ -1,0 +1,41 @@
+$min-instance-size:15rem;
+@import '../../../../sass/main';
+.instances {
+    &__container {
+        margin-top: 2rem;
+    }
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr;
+        @include respond(tab-port) {
+            grid-column-gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax($min-instance-size, 1fr));
+        }
+    }
+}
+
+.instance {
+    margin: 1rem 0;
+    cursor: pointer;
+    &:not(:first-of-type):not(:last-of-type) {
+        @include respond(tab-port) {
+            margin: 1rem;
+        }
+    }
+    &:hover {
+        background-color: darken($color-white, 5);
+    }
+    &__info {
+        display: flex;
+        align-items: center;
+    }
+    &__img {
+        color: $color-primary;
+        margin-right: 1rem;
+    }
+    &__title {
+        display: flex;
+        align-items: center;
+        margin: 0rem;
+    }
+}

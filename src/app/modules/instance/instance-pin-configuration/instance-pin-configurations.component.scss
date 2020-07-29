@@ -1,0 +1,12 @@
+@import '../../../../sass/main';
+.pins {
+    &__actions {
+        margin: 1rem 0rem;
+    }
+}
+
+.info {
+    &:first-of-type {
+        padding-top: 1rem;
+    }
+}

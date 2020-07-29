@@ -1,0 +1,19 @@
+<div class="box__container">
+    <div class="box">
+        <div class="box__header">
+            <button navToBack class="btn box__header--back">
+                <svg class="icon">
+                    <use xlink:href="assets/icons/light.svg#arrow-left"></use>
+                </svg>
+            </button>
+            <a class="box__header--main" [routerLink]="'/'">
+                <img src="assets/images/favicon.ico" alt="Project LATA" class="box__header--logo">
+                <span class="box__header--title">Project LATA</span>
+            </a>
+        </div>
+        <ng-container [ngTemplateOutlet]="main.content"></ng-container>
+    </div>
+    <footer class="box__footer" *ngIf="footer">
+        <ng-container [ngTemplateOutlet]="footer.content"></ng-container>
+    </footer>
+</div>

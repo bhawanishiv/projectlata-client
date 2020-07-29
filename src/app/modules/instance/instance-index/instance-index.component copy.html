@@ -1,0 +1,65 @@
+<ng-template #noPinDefinition>
+    <p>No pin definition found. <a (click)="navToAddPinDefinition()">Add pin Definition</a></p>
+</ng-template>
+<div class="container" *ngIf="instance">
+    <ng-container *ngIf="activity$ | async as activity">
+        <div>
+            <h1>Live status of your instance</h1>
+        </div>
+        <div class="status__container">
+            <mat-card>
+                <mat-card-content>
+                    <!-- Live Status Info Componennt by Activity -->
+
+                    <ng-container [ngSwitch]="activity?.activityId">
+                        <div *ngSwitchCase="'-MAGywiVl0g7bfwScc-V'">
+                            <!-- Live Status for Energy Control Activity -->
+                            <app-energy-control-status [instanceId]="instance?.instanceId">
+                            </app-energy-control-status>
+                        </div>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="status__container">
+            <mat-card>
+                <mat-card-content>
+                    <ng-container *ngIf="filteredPinConfigurations.length>0 else noPinDefinition">
+                        <ng-container *ngFor="let pin of filteredPinConfigurations; let i=index;">
+                            <div class="status">
+                                <div class="status__text"><a [routerLink]="['/i',instance.instanceId,'status',pin?.pinNo]">{{pin?.pinName}}</a></div>
+                                <div class="status__status">
+                                    <div class="badge">
+                                        <div class="badge__main" *ngIf="getStatus(pin?.pinNo)">
+                                            by {{getStatus(pin?.pinNo)?.mode}}
+                                        </div>
+                                        <div class="badge__msc" [class.success]="getPinValue(pin.pinNo)===1" [class.warning]="getPinValue(pin.pinNo)===0" [class.failure]="getPinValue(pin.pinNo)!==0 && getPinValue(pin.pinNo)!==1">{{getStatusText(pin.pinNo)}}</div>
+                                    </div>
+                                </div>
+                                <div class="status__value">
+                                    <ng-container [ngSwitch]="activity?.activityId">
+                                        <div *ngSwitchCase="'-MAGywiVl0g7bfwScc-V'">
+                                            <!-- Live Status for Energy Control Activity -->
+                                            <app-energy-control-pin-status [pinNo]="pin?.pinNo" [instanceId]="instance?.instanceId"></app-energy-control-pin-status>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <button class="status__action" (click)="toggleStatus(pin?.pinNo)">
+                                <svg class="icon" *ngIf="this.getPinValue(pin?.pinNo)!==1 else pause">
+                                     <use  xlink:href="assets/icons/light.svg#play"/>
+                                </svg>
+                                <ng-template #pause>
+                                    <svg class="icon" >
+                                         <use  xlink:href="assets/icons/light.svg#pause"/>
+                                     </svg>
+                                </ng-template>
+                            </button>
+                            </div>
+                            <mat-divider *ngIf="i!==filteredPinConfigurations.length-1"></mat-divider>
+                        </ng-container>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,64 @@
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>
+<div class="container">
+    <header class="head">
+        <a routerLink="/" class="head__brand">
+            <img class="head__brand--logo" src="assets/images/project-lata.png" alt="Project LATA">
+        </a>
+        <ng-container *ngIf="appUser$ | async as appUser">
+            <a class="user" [routerLink]="'/account/'+appUser?.uid">
+                <ngp-user-avatar [user]="appUser"></ngp-user-avatar>
+            </a>
+        </ng-container>
+    </header>
+    <div></div>
+    <section role="main" class="main">
+        <div class="instances__container">
+            <h1>Instance(s) for you</h1>
+            <div class="instances__list">
+                <mat-card class="instance" (click)="navigateToCreateInstance()">
+                    <mat-card-content>
+                        <h3 class="instance__title">
+                            <svg class="icon">
+                            <use xlink:href="assets/icons/light.svg#plus" ></use>                    
+                        </svg>
+                            <span>Add Instance</span>
+                        </h3>
+                    </mat-card-content>
+                </mat-card>
+                <ng-container *ngIf="instances$ | async as instances; else spinner">
+                    <ng-container *ngFor="let instance of instances">
+                        <mat-card class="instance" (click)="navigateToInstance(instance?.instanceId)">
+                            <mat-card-content>
+                                <div class="instance__info">
+                                    <div class="instance__img">
+                                        <svg class="icon">
+                                        <use xlink:href="assets/icons/light.svg#cube" ></use>                    
+                                    </svg>
+                                    </div>
+                                    <div class="instance__info--meta">
+                                        <h3 class="instance__title">{{instance?.instanceName}}</h3>
+                                        <p>{{instance?.instanceId}}</p>
+                                    </div>
+                                </div>
+
+                            </mat-card-content>
+                        </mat-card>
+                        <!-- <div class="media" (click)="navigateToInstance(instance?.instanceId)">
+                        <div class="media__img">
+                            <svg class="icon">
+                                <use xlink:href="assets/icons/light.svg#cube" ></use>                    
+                            </svg>
+                        </div>
+                        <div class="media__description">
+                            <h3 class="media__description--title"></h3>
+                            <p class="media__description--subtitle">{{instance?.instanceId}}</p>
+                        </div>
+                    </div> -->
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</div>

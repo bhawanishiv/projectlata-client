@@ -1,0 +1,59 @@
+$btn-border-radius:5rem;
+@mixin btn__cvr($color) {
+    background-color: $color;
+    color: $color-white;
+    padding: .8rem 1.3rem;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    &[disabled] {
+        color: $color-grey !important;
+        background-color: $color-grey !important;
+        cursor: default;
+    }
+}
+
+.btn {
+    cursor: pointer;
+    align-items: center;
+    display: inline-block;
+    outline: none;
+    border: none;
+    text-align: center;
+    color: $color-black;
+    background-color: transparent;
+    font-weight: 600;
+    padding: .5rem .5rem;
+    font-size: 1rem;
+    &__primary {
+        color: $color-primary;
+        &:hover {
+            color: darken($color-primary, 10);
+            background-color: darken($color-white, 10);
+        }
+        &.btn__cvr {
+            @include btn__cvr($color-primary);
+        }
+        &.btn__rounded {
+            @include btn__cvr($color-primary);
+            border-radius: $btn-border-radius;
+        }
+    }
+    &__secondary {
+        color: $color-secondary;
+        &:hover {
+            color: darken($color-secondary, 10);
+            background-color: darken($color-white, 10);
+        }
+        &.btn__cvr {
+            @include btn__cvr($color-secondary);
+        }
+        &.btn__rounded {
+            @include btn__cvr($color-secondary);
+            border-radius: $btn-border-radius;
+        }
+    }
+}

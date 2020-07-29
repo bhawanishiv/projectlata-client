@@ -1,0 +1,61 @@
+$badge-primary-background-color:$color-primary;
+$badge-secondary-background-color:$color-secondary;
+$badge-padding:.5rem;
+$badge-border-radius:.5rem;
+.badge {
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: $badge-primary-background-color;
+    border-radius: $badge-border-radius;
+    color: $color-white;
+    cursor: pointer;
+    margin: .5rem .5rem .5rem 0rem;
+    &+:before {
+        margin: .5rem;
+    }
+    // &:not(:first-child):not(:last-child) {
+    //     margin-left: 0rem;
+    // }
+    &.success {
+        background-color: $color-green;
+        padding: 0 $badge-padding;
+    }
+    &.passing {
+        background-color: $color-blue;
+        padding: 0 $badge-padding;
+    }
+    &.warning {
+        background-color: $color-orange;
+        padding: 0 $badge-padding;
+    }
+    &.failure {
+        background-color: $color-red;
+        padding: 0 $badge-padding;
+    }
+    &__main {
+        padding: 0 $badge-padding;
+        background-color: $badge-primary-background-color;
+        cursor: pointer;
+    }
+    &__msc {
+        padding: 0 $badge-padding;
+        background-color: $color-orange;
+        cursor: pointer;
+        &.success {
+            background-color: $color-green;
+        }
+        &.passing {
+            background-color: $color-blue;
+        }
+        &.failure {
+            background-color: $color-red;
+        }
+        span {
+            &+::before {
+                content: " \B7 ";
+                padding: 0.2rem 0.2rem;
+            }
+        }
+    }
+}

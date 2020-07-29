@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-content>
+        <div *ngFor="let config of configs; let i=index;">
+            <div class="info">
+                <label>Pin Name</label>
+                <span>{{config?.pinName}}</span>
+            </div>
+            <div class="info">
+                <label>Pin No</label>
+                <span>{{config?.pinNo}}</span>
+            </div>
+            <div class="info">
+                <label>Pin Port</label>
+                <span>{{config?.pinPort}}</span>
+            </div>
+            <div class="info">
+                <label>Pin Type</label>
+                <span>{{config?.pinTypes| json}}</span>
+            </div>
+            <div class="info">
+                <label>Pin Mode</label>
+                <span>{{config?.pinMode}}</span>
+            </div>
+            <mat-divider *ngIf="i!==configs.length-1"></mat-divider>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<div class="pins__actions">
+    <button ngpButton color="primary" class="btn__rounded" (click)="removeAll()">Remove all</button>
+</div>

@@ -1,0 +1,39 @@
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>
+
+<div class="container">
+    <ng-container *ngIf="instance$ | async as instance; else spinner">
+
+        <div>
+            <h2>Your instance</h2>
+        </div>
+        <mat-card>
+            <mat-card-content>
+                <div class="info">
+                    <label>Insance Name</label>
+                    <span>{{instance?.instanceName}}</span>
+                </div>
+                <div class="info">
+                    <label>Insance ID</label>
+                    <span>{{instance?.instanceId}}</span>
+                </div>
+                <div *ngIf="activity$ | async as activity" class="info">
+                    <label>Acvivity</label>
+                    <span>{{activity?.activityName}}</span>
+                </div>
+                <div *ngIf="cpu$ | async as cpu" class="info">
+                    <label>CPU</label>
+                    <span>{{cpu?.cpuName}}</span>
+                </div>
+                <div *ngIf="cmnDevice$ | async as cmnDevice" class="info">
+                    <label>Communication Device</label>
+                    <span>{{cmnDevice?.cpuName}}</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <div class="intance_actions">
+            <button mat-button (click)="deleteInstance(instance?.instanceId)"><mat-icon>delete</mat-icon></button>
+        </div>
+    </ng-container>
+</div>

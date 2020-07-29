@@ -1,0 +1,18 @@
+<div class="root">
+    <header class="head">
+        <ng-container *ngIf="user$ | async as user">
+            <a [routerLink]="['/account/',user?.uid]" class="head__brand">
+                <ngp-user-avatar [user]="user"></ngp-user-avatar>
+            </a>
+        </ng-container>
+    </header>
+    <nav role="navigation" class="nav">
+        <a *ngFor="let link of links" routerLinkActive="active" class="nav__link" [routerLink]="link.path">{{link?.name}}</a>
+    </nav>
+    <section role="main" class="main">
+        <router-outlet></router-outlet>
+        <footer class="footer">
+            <p class="footer__copyright">{{footerText}}</p>
+        </footer>
+    </section>
+</div>

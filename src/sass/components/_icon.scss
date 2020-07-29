@@ -1,0 +1,9 @@
+$default-icon-color:currentColor;
+$default-icon-size:1.5rem;
+$default-icon-padding:.5rem;
+.icon {
+    fill: $default-icon-color;
+    width: $default-icon-size;
+    height: $default-icon-size;
+    padding: 0 $default-icon-padding;
+}
